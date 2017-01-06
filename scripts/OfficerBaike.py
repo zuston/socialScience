@@ -11,9 +11,7 @@ from docx import Document
 
 import sys
 from util import BaikeSpider as Baike
-from util import Logging as lg
 
-# log = lg.Logging("../log/officerBaike.log")
 
 class importExcel(object):
     def __init__(self):
@@ -130,6 +128,7 @@ class exportWord(exportBase):
             p = document.add_paragraph("")
             p.add_run(unicode(self.data[2])).italic = True
             document.add_paragraph(unicode(self.data[3]))
+
             for k,v in self.data[5].items():
                 document.add_paragraph(unicode(str(k)+": "+str(v)))
             resumeP = document.add_paragraph(unicode("简历："))
@@ -141,12 +140,64 @@ class exportWord(exportBase):
             print e
 
 
+class mergeExcel(exportBase):
+    def __init__(self):
+        self.data = None
+        self.exportPath = None
+        self.exportName = None
+
+    def init(self,exportPath,exportName,data=None):
+        self.exportPath = exportPath
+        self.exportName = exportName
+        if data!=None:
+            self.data = data
+
+    def load(self,data):
+        self.data = data
+
+    def export(self,data):
+        self.data = data
+        fileName = self.exportPath+self.exportName
+        if os.path.isdir(self.exportPath) is False:
+            os.mkdir(self.exportPath)
+        try:
+            name = self.data[2]
+            pairs = self.data[5]
+            resume = self.data[4]
+            # print name
+            import xlrd
+            from xlutils.copy import copy
+            rb = xlrd.open_workbook(fileName, encoding_override='utf-8')
+            sh = rb.sheet_by_index(0)
+            wb = copy(rb)
+            ws = wb.get_sheet(0)
+            # flag = int(((sh.row(0))[0].value))
+            flag = None
+            for i in range(2,sh.nrows):
+                strName = unicode(sh.row(i)[7].value)
+                if str(unicode(strName)) == name:
+                    flag = i
+                    break
+            if flag is not None:
+                num = 21
+                for k,v in pairs.items():
+                    ws.write(flag,num,unicode(v))
+                    num += 1
+                for v in resume:
+                    ws.write(flag,num,unicode(v))
+                    num += 1
+            wb.save(fileName)
+
+        except Exception as e:
+            print e
+
+
 if __name__ == '__main__':
     baikeSp = Baike.Baike()
     baikeSp.setLogging("../log/bs.log")
 
-    ew = exportWord()
-    ew.init("../data/officerBaikeWord/","party.docx")
+    ew = mergeExcel()
+    ew.init("../data/officerBaikeWord/mergeToExcel/","party.xls")
     baikeSp.exportChoice(ew)
 
     ie = importExcel()
