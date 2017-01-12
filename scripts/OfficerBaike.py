@@ -1,7 +1,9 @@
 #!coding:utf-8
 
 '''
-百度百科搜索集成
+
+百度百科搜索官员信息
+
 '''
 import os
 import xlrd
