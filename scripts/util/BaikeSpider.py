@@ -124,7 +124,7 @@ class spider(object):
     def searchWord(self, string):
         splitList = string.split(':')
         self.keyword = splitList[-1]
-        self.limitWord = splitList[:-1]
+        self.limitWord = splitList[1:-1]
 
     def start(self):
         code, msg, res = self.http.open(self.requestUrl + self.keyword)

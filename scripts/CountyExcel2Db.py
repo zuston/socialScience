@@ -14,7 +14,7 @@ class importExcel(object):
     def load(self, fileName,flag):
         if os.path.exists(self.dataPath) and os.path.isfile(self.dataPath + fileName):
             excelName = self.dataPath + fileName
-            tag_row = 1 if flag==0 else 2
+            tag_row = 1 if flag==0 else 1
             book = xlrd.open_workbook(excelName, encoding_override='utf-8')
             sh = book.sheet_by_index(0)
 

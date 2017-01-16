@@ -10,10 +10,11 @@ import xlrd
 from bs4 import BeautifulSoup as bs
 import xlwt
 from docx import Document
-
+from multiprocessing import Process
 import sys
 from util import BaikeSpider as Baike
-
+from util import Mongo as mg
+import logging
 
 class importExcel(object):
     def __init__(self):
@@ -33,14 +34,14 @@ class importExcel(object):
                 city = str(sh.row(rx)[3].value)
                 area = str(sh.row(rx)[5].value)
                 name = str(sh.row(rx)[7].value)
+                code = str(long(sh.row(rx)[4].value))
                 # print province + ' ' + city + ' ' + area + ' ' + name
                 if len(name) != 0 and name != 'N/A' and name != '' and name != ' ':
-                    dataSet.add(province.strip() + ':' + city.strip() + area.strip() + ':' + name.strip())
+                    dataSet.add(code.strip()+":"+province.strip() + ':' + city.strip() + ':' + area.strip() + ':' + name.strip())
             return dataSet
         else:
             # log.warn("file path error")
             return dataSet
-
 
 
 class exportBase(object):
@@ -194,16 +195,108 @@ class mergeExcel(exportBase):
             print e
 
 
+class exportMongo(exportBase):
+    def __init__(self):
+        self.mongoDb = mg.Mongo().db
+        self.mongoDbCounty = self.mongoDb["county"]
+        self.mongoDbPerson = self.mongoDb["person"]
+
+        self.data = None
+        self.flag = 0
+
+    def init(self,exportPath,exportName,data=None):
+        pass
+
+
+    def export(self,data):
+        self.data = data
+        code = data[0]
+        province = data[1]
+        city = data[2]
+        area = data[3]
+
+        name = data[4]
+        simpleInfo = data[5]
+        complexInfoList = data[6]
+        complexParamDict = data[7]
+        personInfoList = data[4:]
+
+        objectId = self.__saveToMongo(personInfoList)
+
+        self.__findByMongo(objectId,code,name)
+
+    def __findByMongo(self,objectId,code,name):
+        res = self.mongoDbCounty.find_one(
+            {
+                # "province":province,
+                # "city":city,
+                "code":code
+            }
+        )
+        if res is None:
+            logging.error("[!]error\t"+"code:"+code)
+            exit(1)
+
+        keyName = "gov" if self.flag==0 else "party"
+
+        if res.has_key(keyName):
+            for key, value in enumerate(res[keyName]):
+                if value["name"] == name:
+                    res[keyName][key]["relationId"] = objectId
+            self.mongoDbCounty.update({"code":code},res)
+            logging.info("[+]related to the county collection\t"+"code:"+code)
+        else:
+            logging.warn("[+++]the key missing\t" + "code:" + code)
+            exit(1)
+
+    def __saveToMongo(self,personInfoList):
+        paramDict = personInfoList[3]
+
+        paramList = []
+        for k,v in paramDict.items():
+            paramList.append(k+":"+v)
+
+        resumeList = []
+        for k in personInfoList[2]:
+            resumeList.append(k)
+
+        dataDict = {
+            "name" : personInfoList[0],
+            "simpleInfo" : personInfoList[1],
+            "resume" : resumeList,
+            "paramDict" : paramList
+        }
+        # print dataDict["name"]
+        # print dataDict["simpleInfo"]
+        # print dataDict["resume"]
+        # print dataDict["paramDict"]
+        return self.mongoDbPerson.insert_one(dataDict).inserted_id
+
+
+    #
+    def setFlag(self,flag):
+        self.flag = flag
+
+
 if __name__ == '__main__':
     baikeSp = Baike.Baike()
     baikeSp.setLogging("../log/bs.log")
 
-    ew = mergeExcel()
-    ew.init("../data/officerBaikeWord/mergeToExcel/","party.xls")
+    # ew = mergeExcel()
+    # ew.init("../data/officerBaikeWord/mergeToExcel/","party.xls")
+    ew = exportMongo()
+    ew.init("","")
+    ew.setFlag(1)
     baikeSp.exportChoice(ew)
 
     ie = importExcel()
     data = ie.load("县委书记名单.xls")
     baikeSp.importData(data)
 
+    baikeSp.start()
+
+    ew.setFlag(0)
+    baikeSp.exportChoice(ew)
+    data = ie.load("县长的名单.xlsx")
+    baikeSp.importData(data)
     baikeSp.start()
