@@ -5,6 +5,10 @@ import os
 import logging
 from util import Mongo as mg
 
+
+'''
+将县长县委书记导入到mongo中
+'''
 mongoDb = mg.Mongo().db["county"]
 
 class importExcel(object):

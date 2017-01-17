@@ -1,9 +1,8 @@
 #!coding:utf-8
 
 '''
-
+搜索县级官员信息，来投入到mongodb中
 百度百科搜索官员信息
-
 '''
 import os
 import xlrd
