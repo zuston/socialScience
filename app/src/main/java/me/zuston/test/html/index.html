@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>index</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2>Social-Science-Platform</h2>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <form class="bs-example bs-example-form" role="form" method="post" action="/search">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+
+                                <select class="form-control btn btn-default dropdown-toggle select" name="select" style="width:60px;" type="button">
+                                    <option value="one">heh</option>
+                                    <option value="two">two</option>
+                                    <option value="three">three</option>
+                                    <option value="four">four</option>
+                                    <option value="five">five</option>
+                                </select>
+
+                            </div><!-- /btn-group -->
+                            <input type="text" class="form-control" name="searchContent">
+                            <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="submit">
+                    </span>
+                        </div><!-- /input-group -->
+
+
+                        <div class="nohidden one">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="oneoption1" name="checkbox-one">one-checkbox-1
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="oneoption2" name="checkbox-one">one-checkbox-2
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox3" value="oneoption3" name="checkbox-one">one-checkbox-3
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="oneoptionsRadios3" value="option1" checked>one-radio-1
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="oneoptionsRadios4" value="option2">one-radio-2
+                            </label>
+                        </div>
+
+                        <div class="hidden two">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="twooption1" name="checkbox-two">two-checkbox-1
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="twooption2" name="checkbox-two">two-checkbox-2
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox3" value="twooption3" name="checkbox-two">two-checkbox-3
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="twooptionsRadios3" value="option1" checked>two-radio-1
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="optionsRadiosinline" id="twooptionsRadios4" value="option2">two-radio-2
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+</body>
+<script>
+    $(document).ready(function(){
+        var initSelectValue = $(".select").children("option:selected").val();
+        $(".select").change(function(){
+            var changeValue = $(this).children("option:selected").val();
+            $("."+initSelectValue).addClass("hidden");
+            $("."+changeValue).removeClass("hidden");
+            initSelectValue = changeValue;
+        });
+    });
+</script>
+</html>
