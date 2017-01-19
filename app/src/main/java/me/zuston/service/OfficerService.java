@@ -80,12 +80,14 @@ public class OfficerService {
 
     public static void main(String[] args) {
         HashMap<String,String> hashMap = new HashMap<String, String>();
-        hashMap.put("searchContent","南京");
+        hashMap.put("searchContent","马骥");
         hashMap.put("select","");
-        hashMap.put("radio1","nativePlace");
-        List<OfficerBean> officerBeen = OfficerService.getInfo(hashMap).get("officerBean");
-        for(OfficerBean officerBean:officerBeen){
-            System.out.println(officerBean.getName());
+        hashMap.put("radio1","name");
+        List<PersonBean> officerBeen = OfficerService.getInfo(hashMap).get("personBean");
+        for(PersonBean officerBean:officerBeen){
+            for(String str:officerBean.paramDict){
+                System.out.println(str);
+            }
         }
     }
 }

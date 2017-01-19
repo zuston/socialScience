@@ -56,7 +56,8 @@ public class Connection {
         System.out.println(document.toJson());
 
         MongoCollection<Document> collection = mongoDatabase.getCollection("corrupt");
-        System.out.println(collection.find().first());
+        JsonObject jsonObject1 = (JsonObject) parser.parse(collection.find().first().toJson());
+        System.out.println(jsonObject1.get("_id").getAsJsonObject().get("$oid").getAsString());
 
     }
 

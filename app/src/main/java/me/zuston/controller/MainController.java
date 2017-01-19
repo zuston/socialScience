@@ -1,15 +1,16 @@
 package me.zuston.controller;
 
+import me.zuston.bean.CityBean;
 import me.zuston.bean.CorruptBean;
+import me.zuston.bean.CountyBean;
+import me.zuston.service.AreaService;
 import me.zuston.service.CorruptService;
 import me.zuston.service.OfficerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,10 +38,17 @@ public class MainController {
                          @RequestParam("optionRadio1")String optionRadio1,
                          @RequestParam("optionRadio2")String optionRadio2,
                          @RequestParam("optionRadio3")String optionRadio3,
-                         @RequestParam("optionRadio3")String optionRadio4,
+                         @RequestParam("optionRadio4")String optionRadio4,
                          ModelMap modelMap){
 
         HashMap<String,String> container = new HashMap<String, String>();
+
+        // TODO: 17/1/19
+        content = "522630";
+        optionRadio1 = "code";
+        optionRadio4 = "countyOption";
+        select = "area";
+
         container.put("searchContent",content);
         container.put("select",select);
         container.put("radio1",optionRadio1);
@@ -51,18 +59,34 @@ public class MainController {
         if(select.equals("corrupt")){
             List<CorruptBean> corruptBeenList = CorruptService.getInfo(container);
             modelMap.addAttribute("corruptBeenList",corruptBeenList);
+            return "corrupt";
         }
 
         if(select.equals("officer")){
             HashMap<String,List> officerHashMap = (HashMap<String, List>) OfficerService.getInfo(container);
             modelMap.addAttribute("officerMap",officerHashMap);
+            return "officer";
         }
 
         if(select.equals("area")){
+            HashMap<String,List> hashMap = new HashMap<String, List>();
 
+            optionRadio4 = "countyOption";
+
+            if(optionRadio4.equals("cityOption")){
+                List<CityBean> rsList = AreaService.getInfo(container);
+                hashMap.put("cityOption",rsList);
+            }
+            if(optionRadio4.equals("countyOption")){
+                List<CountyBean> rsList = AreaService.getInfo(container);
+                hashMap.put("countyOption",rsList);
+            }
+
+            modelMap.addAttribute("areaList",hashMap);
+            return "area";
         }
 
-        return "show";
+        return "officer";
     }
 
 }

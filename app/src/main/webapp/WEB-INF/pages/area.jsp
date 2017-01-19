@@ -1,12 +1,13 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%--
   Created by IntelliJ IDEA.
   User: zuston
   Date: 17/1/17
-  Time: 下午3:56
+  Time: 下午10:44
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,11 +16,11 @@
     <title>社会科学官员检索</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link href="js/font-awesome.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="css/ss.css">
-    <script src="js/jquery.quovolver.min.js"></script>
+    <script src="jquery.quovolver.min.js"></script>
     <!--[if lt IE 9]-->
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -149,8 +150,138 @@
             </div>
         </div>
     </div>
-    <!--banner ends-->
 </header>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <c:choose>
+                    <c:when test="${areaList!=null}">
+                        <c:forEach items="${areaList.get('cityOption')}" var="city">
+                            <div class="tableStyle">
+                                <p class="baikeName">${city.province}&nbsp;&nbsp;<a class="baikeNameName">${city.city}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区代码：&nbsp;&nbsp;<a class="baikeNameName">${city.code}</a></p>
+                                <p class="simpleInfo"></p>
+
+                                <h3>地级市任职情况</h3>
+                                <c:forEach items="${city.mayor}" var="me">
+                                    <div class="resume areaResume">
+                                        <p><a class="year">${me.value.year.toString()}</a> <a class="name">${me.value.name}</a></p>
+                                        <div class="row param">
+                                            <div class="col-md-6">
+                                                <p>年龄 ： ${me.value.age.toString()}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>教育程度 ： ${me.value.education.toString()}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职来源 ： ${me.value.origin}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>籍贯 ： ${me.value.nativePlace}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职时省长籍贯 ： ${me.value.provinceGovNativePlace}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职时省长 ： ${me.value.provinceGovName}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职来源 ： ${me.value.beforeExperience}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>卸任去向 ： ${me.value.afterExperience}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>生日 ： ${me.value.birth}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职时省委书记 ： ${me.value.provincePartyName}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>任职时省委籍贯 ： ${me.value.provincePartyNativePlace}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>卸任去向 ： ${me.value.afterExperience}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>生日 ： ${me.value.birth}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </c:forEach>
+
+                            </div>
+                        </c:forEach>
+
+
+                        <c:forEach items="${areaList.get('countyOption')}" var="county">
+                            <div class="tableStyle">
+                                <%--<p class="baikeName">${county.province}&nbsp;&nbsp;<a class="baikeNameName">${county.city}</a>&nbsp;&nbsp;${county.area}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区代码：&nbsp;&nbsp;<a class="baikeNameName">${county.code}</a></p>--%>
+
+                                <h3>区/县市任职情况</h3>
+                                <h4>党委任职</h4>
+                                <%--<c:forEach items="${county.countyPartyPersonHashMap}" var="me">--%>
+                                    <%--<div class="resume areaResume">--%>
+                                        <%--<p><a class="year">${me.value.year}</a> <a class="name">${me.value.name}</a></p>--%>
+                                        <%--<div class="row param">--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>年龄 ： ${me.value.age}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>来源 ： ${me.value.origin}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>卸任去向 ： ${me.value.after}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>任职之前 ： ${me.value.before}</p>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                <%--</c:forEach>--%>
+                                <%--<h4>政府任职</h4>--%>
+                                <%--<c:forEach items="${city.countyPartyPersonHashMap}" var="me">--%>
+                                    <%--<div class="resume areaResume">--%>
+                                        <%--<p><a class="year">${me.value.year}</a> <a class="name">${me.value.name}</a></p>--%>
+                                        <%--<div class="row param">--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>年龄 ： ${mayor.value.age}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>来源 ： ${mayor.value.origin}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>卸任去向 ： ${mayor.value.after}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<div class="col-md-4">--%>
+                                                <%--<p>任职之前 ： ${mayor.value.before}</p>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                <%--</c:forEach>--%>
+
+                            </div>
+                        </c:forEach>
+
+                    </c:when>
+                    <c:otherwise>
+                        <div class="tableStyle">
+                            <p class="error">没有找到您要的数据</p>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
 
 <!--news section-->
 <section class="contact" id="contact" style="margin-top:30px;">
@@ -175,7 +306,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <p>Copyright &copy; 2017.SHU All rights reserved.<a href="#" target="_blank" title="SocialScience">社会学院</a> </p>
+                <p>Copyright &copy; 2017.SHU All rights reserved.<a href="http://www.cssmoban.com/" target="_blank" title="SocialScience">社会学院</a> </p>
             </div>
         </div>
     </div>
@@ -190,7 +321,6 @@
 <!--for smooth scrolling-->
 <script>
     $(document).ready(function(){
-
         var initSelectValue = $(".select").children("option:selected").val();
         $(".select").change(function(){
             var changeValue = $(this).children("option:selected").val();
@@ -206,3 +336,5 @@
 
 </body>
 </html>
+
+

@@ -21,11 +21,7 @@ public class CityPersonBean {
      "age" : "49"
      */
 
-    public String origin;
-    public String nativePlace;
-    public String provinceGovNativePlace;
-    public String afterExperience;
-    public String birth;
+
 
     public void setOrigin(String origin) {
         this.origin = origin;
@@ -158,6 +154,11 @@ public class CityPersonBean {
         this.age = age;
     }
 
+    public String origin;
+    public String nativePlace;
+    public String provinceGovNativePlace;
+    public String afterExperience;
+    public String birth;
     public int year;
     public String education;
     public String name;

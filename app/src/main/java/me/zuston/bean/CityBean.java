@@ -1,6 +1,7 @@
 package me.zuston.bean;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by zuston on 17/1/18.
@@ -74,4 +75,5 @@ public class CityBean {
     }
 
     public HashMap<String,CityPersonBean> mayor = new HashMap<String, CityPersonBean>();
+//    public List<CityPersonBean> mayor = new HashMap<>();
 }

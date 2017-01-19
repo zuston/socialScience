@@ -3,6 +3,7 @@ package me.zuston.service;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import me.zuston.bean.CityBean;
+import me.zuston.bean.CountyBean;
 import me.zuston.dao.AreaDao;
 import me.zuston.util.MongoDB;
 import org.bson.Document;
@@ -16,7 +17,6 @@ import java.util.List;
 public class AreaService {
     public static List getInfo(HashMap<String,String> hashMap){
         String content = hashMap.get("searchContent");
-        String select  = hashMap.get("select");
         String choice  = hashMap.get("radio4");
         String option  = hashMap.get("radio1");
 
@@ -25,17 +25,20 @@ public class AreaService {
             List<CityBean> cityBeanList = areaDao.getFromCity(content,option);
             return cityBeanList;
         }
+        List<CountyBean> countyBeanList = areaDao.getFromCounty(content,option);
 
-
-        return null;
+        return countyBeanList;
 
     }
 
     public static void main(String[] args) {
         HashMap<String,String> hashMap = new HashMap<String, String>();
-        hashMap.put("searchContent","451100");
-        hashMap.put("radio4","cityOption");
+        hashMap.put("searchContent","522630");
+        hashMap.put("radio4","countyOption");
         hashMap.put("radio1","code");
-        AreaService.getInfo(hashMap);
+        List<CountyBean> countyBeanList = AreaService.getInfo(hashMap);
+        for(CountyBean countyBean:countyBeanList){
+            System.out.println(countyBean.area);
+        }
     }
 }

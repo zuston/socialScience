@@ -9,6 +9,8 @@ public class PersonBean {
 
     public String name;
     public String simpleInfo;
+    public ArrayList<String> paramDict;
+    public ArrayList<String> resume;
 
     public void setName(String name) {
         this.name = name;
@@ -50,6 +52,5 @@ public class PersonBean {
         this.resume = resume;
     }
 
-    public ArrayList<String> paramDict;
-    public ArrayList<String> resume;
+
 }
