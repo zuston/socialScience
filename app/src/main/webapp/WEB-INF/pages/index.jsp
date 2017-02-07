@@ -27,159 +27,11 @@
 </head>
 <body>
 <!--header starts-->
-<header class="main-header">
-    <div class="backbg-color">
-        <!--banner starts-->
-        <div class="banner-text">
-            <div class="container">
-                <div class="row">
-                    <div class="banner-info text-center">
-                        <h2><span class="grey">SHU</span> - SocialScience Platform</h2>
-                    </div>
-                    <form method="post" action="/search">
-                        <div class="banner-search col-md-offset-2 col-md-8 col-md-offset-2">
-                            <div class="col-md-3">
-                                <select class="form-control sellone select" name="select">
-                                    <option value="corrupt">贪腐情况查询</option>
-                                    <option value="officer">官员情况查询</option>
-                                    <option value="area">市区县往期任职</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control selltwo" placeholder="enter the search content" name="searchContent">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-btn">
-                                    <button type="submit">Search</button>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="nohidden corrupt">
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="option-1-null" hidden=""><a class="tip">干部等级</a>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="option-1-null" checked><a class="option">无</a>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="zggb">中管干部
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="sggb">省管干部
-                                    </label>
-                                    <br>
-                                    <div class="col-md-12" style="height:10px;"></div>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="option-1-null" hidden=""><a class="tip">贪腐类型</a>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio2" id="radio2" value="option-2-null" checked>无
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio2" id="radio2" value="zjsc">执纪审查
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio2" id="radio2" value="djcf">党纪处分
-                                    </label>
-                                    <br>
-                                    <div class="col-md-12" style="height:10px;"></div>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="option-1-null" hidden=""><a class="tip">限制条件</a>
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio3" id="radio3" value="name" checked>姓名
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio3" id="radio3" value="area">省/市/区/县
-                                    </label>
-                                </div>
 
-                                <div class="hidden officer">
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="name" checked>姓名
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="nativePlace">籍贯
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="position">职位
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="province">省
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="city">市
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="area">区、县
-                                    </label>
-                                </div>
+<jsp:include page="include/searchInc.jsp" flush="false" />
 
-                                <div class="hidden area">
+<jsp:include page="include/footer.jsp" flush="true" />
 
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio4" id="radio4" value="cityOption" checked>地级市任职
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio4" id="radio4" value="areaOption">区县任职
-                                    </label>
-                                    <br>
-                                    <div class="col-md-12" style="height:10px;"></div>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="code" checked>地区代码
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="province">省
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="city">市
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="radio" name="optionRadio1" id="radio" value="area">区县
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--banner ends-->
-</header>
-
-<!--news section-->
-<section class="contact" id="contact" style="margin-top:30px;">
-    <div class="container">
-        <div class="contact-info">
-            <div class="col-md-12">
-                <div class="col-md-8">
-                    <div class="cont-txt">
-                        <h3>Contact Us to Sign Up for an Open House</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula dapibus mauris.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center">
-                    <a href="#" class="cont-btn">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="footer-line">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p>Copyright &copy; 2017.SHU All rights reserved.<a href="#" target="_blank" title="SocialScience">社会学院</a> </p>
-            </div>
-        </div>
-    </div>
-</section>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-1.11.3.min.js"></script>
@@ -190,14 +42,14 @@
 <!--for smooth scrolling-->
 <script>
     $(document).ready(function(){
-
         var initSelectValue = $(".select").children("option:selected").val();
         $(".select").change(function(){
             var changeValue = $(this).children("option:selected").val();
             $("."+initSelectValue).addClass("hidden").removeClass("nohidden");
-            $("."+initSelectValue+" #radio").attr("name","undefined");
+//            $("."+initSelectValue+" #radio").attr("name","undefined");
             $("."+changeValue).removeClass("hidden");
-            $("."+changeValue+" #radio").attr("name","optionRadio1");
+//            $("."+changeValue+" #radio").attr("name","optionRadio1");
+            $(".form-controller").attr("action","search-"+changeValue);
             initSelectValue = changeValue;
         });
     });

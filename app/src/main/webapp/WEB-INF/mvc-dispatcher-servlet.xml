@@ -22,6 +22,8 @@
     <mvc:resources location="/WEB-INF/pages/static/js/" mapping="/js/**" />
     <mvc:resources location="/WEB-INF/pages/static/fonts/" mapping="/fonts/**" />
 
+    <mvc:resources mapping="/include/**" location="/WEB-INF/pages/include/"></mvc:resources>
+
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/pages/"/>

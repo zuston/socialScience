@@ -18,6 +18,43 @@ public class CountyPartyPerson {
 
     public String origin;
     public String name;
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public String getAfter() {
+        return after;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public String getTenure() {
+        return tenure;
+    }
+
+    public String getPromote() {
+        return promote;
+    }
+
+    public String getBefore() {
+        return before;
+    }
+
     public String age;
     public String after;
     public String year;

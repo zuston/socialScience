@@ -48,4 +48,28 @@ public class CountyBean {
         this.countyGovPersonHashMap = countyGovPersonHashMap;
         this.countyPartyPersonHashMap = countyPartyPersonHashMap;
     }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public HashMap<String, CountyGovPerson> getCountyGovPersonHashMap() {
+        return countyGovPersonHashMap;
+    }
+
+    public HashMap<String, CountyPartyPerson> getCountyPartyPersonHashMap() {
+        return countyPartyPersonHashMap;
+    }
 }

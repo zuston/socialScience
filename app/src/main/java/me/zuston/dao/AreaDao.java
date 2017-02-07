@@ -38,12 +38,11 @@ public class AreaDao {
 
     public List<CityBean> getFromCity(String searchContent,String key){
         // TODO: 17/1/19
-        BasicDBObject condition = buildCondition(searchContent,"code");
+        BasicDBObject condition = buildCondition(searchContent,key);
 
         List<CityBean> cityBeanList = new ArrayList<CityBean>();
         JsonParser parser = new JsonParser();
         for (Document document:mongoCollectionCity.find(condition)){
-            System.out.println("after loop");
             JsonObject jsonObject = (JsonObject) parser.parse(document.toJson());
             HashMap<String,CityPersonBean> cityPersonBeanHashMap = __mayorToHashMap(jsonObject);
 
@@ -97,15 +96,16 @@ public class AreaDao {
 
 
     public List<CountyBean> getFromCounty(String content, String option) {
-        // TODO: 17/1/19
-        option = "code";
+
         BasicDBObject condition = buildCondition(content,option);
         List<CountyBean> countyBeenList = new ArrayList<CountyBean>();
         JsonParser parser = new JsonParser();
         for (Document document:mongoCollectionCounty.find(condition)){
+            System.out.println("in the loop");
             JsonObject jsonObject = (JsonObject) parser.parse(document.toJson());
             countyBeenList.add(addToCountyBean(jsonObject));
         }
+
         return countyBeenList;
     }
 

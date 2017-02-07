@@ -20,4 +20,11 @@ public class Tool {
     }
 
 
+    public static boolean filterContent(String content) {
+        content = content.trim();
+        if (content.length()==0 || content==null || content.equals("") ){
+            return false;
+        }
+        return true;
+    }
 }

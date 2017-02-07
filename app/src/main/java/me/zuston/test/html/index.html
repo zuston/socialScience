@@ -13,7 +13,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
 
-            <form class="bs-example bs-example-form" role="form" method="post" action="/search">
+            <form class="bs-example bs-example-form form-controller" role="form" method="post" action="/search">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="input-group">
@@ -88,8 +88,10 @@
         $(".select").change(function(){
             var changeValue = $(this).children("option:selected").val();
             $("."+initSelectValue).addClass("hidden");
+            $(".form-controller").attr("action","/search-"+changeValue)
             $("."+changeValue).removeClass("hidden");
             initSelectValue = changeValue;
+
         });
     });
 </script>

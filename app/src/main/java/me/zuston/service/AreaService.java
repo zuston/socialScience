@@ -17,8 +17,8 @@ import java.util.List;
 public class AreaService {
     public static List getInfo(HashMap<String,String> hashMap){
         String content = hashMap.get("searchContent");
-        String choice  = hashMap.get("radio4");
-        String option  = hashMap.get("radio1");
+        String choice  = hashMap.get("radio1");
+        String option  = hashMap.get("radio4");
 
         AreaDao areaDao = new AreaDao();
         if(choice.equals("cityOption")){
